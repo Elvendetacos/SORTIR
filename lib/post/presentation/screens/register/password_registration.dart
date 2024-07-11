@@ -16,7 +16,7 @@ class PasswordRegistration extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 28),
-          const TextFormInput(hintText: 'My password is...', type: 'password', width: 0.9),
+          const TextFormInput(hintText: 'My password is...', type: 'password', width: 0.9,),
           const SizedBox(height: 28),
           const TextFormInput(hintText: 'Repeat my password is...', type: 'password', width: 0.9),
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),

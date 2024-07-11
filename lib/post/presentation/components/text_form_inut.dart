@@ -4,8 +4,15 @@ class TextFormInput extends StatefulWidget {
   final String hintText;
   final String type;
   final double width;
+  final TextInputType keyboardType;
 
-  const TextFormInput({super.key, required this.hintText, required this.type, required this.width});
+  const TextFormInput({
+    super.key,
+    required this.hintText,
+    required this.type,
+    required this.width,
+    this.keyboardType = TextInputType.text
+  });
 
   @override
   _TextFormInputState createState() => _TextFormInputState();
@@ -21,6 +28,7 @@ class _TextFormInputState extends State<TextFormInput> {
       child: TextField(
         obscureText: widget.type == 'password' ? _obscureText : false,
         style: const TextStyle(color: Colors.white, fontSize: 19),
+        keyboardType: widget.keyboardType,
         decoration: InputDecoration(
           focusColor: const Color(0xff8C52FF),
           hintText: widget.hintText,

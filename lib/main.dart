@@ -4,6 +4,7 @@ import 'package:sortir/post/presentation/screens/init_page.dart';
 import 'package:sortir/post/presentation/screens/login/login.dart';
 import 'package:sortir/post/presentation/screens/register/email_registration.dart';
 import 'package:sortir/post/presentation/screens/register/gender_selector.dart';
+import 'package:sortir/post/presentation/screens/register/more_information.dart';
 import 'package:sortir/post/presentation/screens/register/password_registration.dart';
 import 'package:sortir/post/presentation/screens/register/phone_number_registration.dart';
 import 'package:sortir/post/presentation/screens/register/verification_registration.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         'gender': (context) => const GenderSelector(),
         'preferences': (context) =>  const PreferencesSelector(),
         'events': (context) => const Events(),
+        'info': (context) => const MoreInformation(),
       }
     );
   }

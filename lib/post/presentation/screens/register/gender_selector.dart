@@ -84,7 +84,7 @@ class _GenderSelectorState extends State<GenderSelector> {
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.46),
-          const ActionButton(navigateTo: 'preferences', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white),
+          const ActionButton(navigateTo: 'info', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white),
         ],
       ),
     );
