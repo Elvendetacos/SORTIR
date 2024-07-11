@@ -6,6 +6,8 @@ import 'package:sortir/post/presentation/layout/layout_forms.dart';
 
 class MoreInformation extends StatelessWidget {
   const MoreInformation({Key? key}) : super(key: key);
+  final String age = '';
+  final String city = '';
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,34 @@ class MoreInformation extends StatelessWidget {
         children: Column(
           children:[
             const SizedBox(height: 28),
-            const TextFormInput(hintText: "Age", type: 'other', width: 0.9, keyboardType: TextInputType.number),
+            TextFormInput(
+                hintText: "Age",
+                type: 'other',
+                width: 0.9,
+                keyboardType: TextInputType.number,
+                onChanged: (age){
+                  print(age);
+                }
+            ),
             const SizedBox(height: 28),
-            const TextFormInput(hintText: 'City', type: 'other', width: 0.9),
+            TextFormInput(
+                hintText: 'City',
+                type: 'other',
+                width: 0.9,
+                onChanged: (city){
+                  print(city);
+                }
+            ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-            const ActionButton(navigateTo: 'preferences', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white)
+            ActionButton(
+                navigateTo: 'preferences',
+                content: 'CONTINUE',
+                color: Color(0xff9747FF),
+                txtColor: Colors.white,
+                onPressed: (){
+                  print("more information");
+                },
+              ),
           ]
         ),
       ),

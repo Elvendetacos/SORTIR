@@ -65,7 +65,13 @@ class _PhoneNumberState extends State<PhoneNumber> {
             child: const Text('This phone number will not be visible  unless you change your mind, this option is configurable later.', style: TextStyle(color: Color(0xff828693), fontSize: 13.59),),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.13),
-          const ActionButton(navigateTo: 'verification', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white)
+          ActionButton(
+            navigateTo: 'verification',
+            content: 'CONTINUE',
+            color: Color(0xff9747FF),
+            txtColor: Colors.white,
+            onPressed: () {  }
+            ,)
         ]
       ),
     );

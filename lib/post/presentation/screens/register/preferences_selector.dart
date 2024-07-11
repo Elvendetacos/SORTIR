@@ -79,7 +79,12 @@ class _PreferencesSelectorState extends State<PreferencesSelector> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              const ActionButton(navigateTo: 'events', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white),
+              ActionButton(
+                navigateTo: 'events',
+                content: 'CONTINUE',
+                color: Color(0xff9747FF),
+                txtColor: Colors.white,
+                onPressed: () {  },),
             ]
         )
     );

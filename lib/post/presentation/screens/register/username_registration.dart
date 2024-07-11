@@ -6,6 +6,9 @@ import 'package:sortir/post/presentation/layout/layout_forms.dart';
 class UsernameRegistration extends StatelessWidget{
   const UsernameRegistration({super.key});
 
+  final String firstName = '';
+  final String lastName = '';
+
   @override
   Widget build(BuildContext context) {
     return LayoutForms(
@@ -15,16 +18,35 @@ class UsernameRegistration extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 28),
-          const TextFormInput(hintText: 'My first name is...', type: 'text', width: 0.9),
+          TextFormInput(
+              hintText: 'My first name is...',
+              type: 'text',
+              width: 0.9,
+              onChanged: (firstName){
+                print(firstName);
+              }
+            ),
           const SizedBox(height: 28),
-          const TextFormInput(hintText: 'My last name is...', type: 'text', width: 0.9),
+          TextFormInput(
+              hintText: 'My last name is...',
+              type: 'text',
+              width: 0.9,
+              onChanged: (lastName){
+                print(lastName);
+              }
+          ),
           const SizedBox(height: 28),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.9 ,
             child: const Text('This information will be public and this way you will be known in the app.',  style: TextStyle(color: Color(0xff828693), fontSize: 13.59)),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          const ActionButton(navigateTo: 'email', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white),
+          ActionButton(
+            navigateTo: 'email',
+            content: 'CONTINUE',
+            color: Color(0xff9747FF),
+            txtColor: Colors.white,
+            onPressed: () {  },),
         ],
       ),
     );

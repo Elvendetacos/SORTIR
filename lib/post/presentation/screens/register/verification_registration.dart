@@ -92,7 +92,13 @@ class _VerificationState extends State<Verification> {
             )
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.12),
-          const ActionButton(navigateTo: 'username', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white)
+          ActionButton(
+            navigateTo: 'username',
+            content: 'CONTINUE',
+            color: Color(0xff9747FF),
+            txtColor: Colors.white,
+            onPressed: () {  },
+          )
         ],
       ),
     );

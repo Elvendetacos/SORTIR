@@ -5,6 +5,7 @@ import 'package:sortir/post/presentation/layout/layout_forms.dart';
 
 class EmailRegistration extends StatelessWidget{
   const EmailRegistration({super.key});
+  final String emailValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,25 @@ class EmailRegistration extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 28),
-          const TextFormInput(hintText: 'My email is...', type: 'email', width: 0.9, keyboardType: TextInputType.emailAddress,),
+          TextFormInput(
+            hintText: 'My email is...',
+            type: 'email',
+            width: 0.9,
+            keyboardType: TextInputType.emailAddress,
+            onChanged: (emailValue){
+              print(emailValue);
+            }
+          ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          const ActionButton(navigateTo: 'password', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white),
+          ActionButton(
+            navigateTo: 'password',
+            content: 'CONTINUE',
+            color: Color(0xff9747FF),
+            txtColor: Colors.white,
+            onPressed: (){
+              print("email");
+            },
+          ),
         ],
       )
     );

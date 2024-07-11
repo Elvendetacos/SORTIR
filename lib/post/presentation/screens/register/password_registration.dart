@@ -5,6 +5,8 @@ import 'package:sortir/post/presentation/layout/layout_forms.dart';
 
 class PasswordRegistration extends StatelessWidget{
   const PasswordRegistration({super.key});
+  final String passwordValue = '';
+  final String repeatPasswordValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +18,31 @@ class PasswordRegistration extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 28),
-          const TextFormInput(hintText: 'My password is...', type: 'password', width: 0.9,),
+          TextFormInput(
+            hintText: 'My password is...',
+            type: 'password',
+            width: 0.9,
+            onChanged: (passwordValue){
+              print(passwordValue);
+            },
+          ),
           const SizedBox(height: 28),
-          const TextFormInput(hintText: 'Repeat my password is...', type: 'password', width: 0.9),
+          TextFormInput(
+              hintText: 'Repeat my password is...',
+              type: 'password',
+              width: 0.9,
+              onChanged: (repeatPasswordValue){
+                print(repeatPasswordValue);
+              }
+          ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          const ActionButton(navigateTo: 'gender', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white),
+          ActionButton(
+            navigateTo: 'gender',
+            content: 'CONTINUE',
+            color: Color(0xff9747FF),
+            txtColor: Colors.white,
+            onPressed: () {  }
+            ,),
         ],
       )
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
 
-  const ActionButton({super.key, required this.navigateTo, required this.content, required this.color, required this.txtColor});
+  const ActionButton({super.key, required this.navigateTo, required this.content, required this.color, required this.txtColor, required this.onPressed});
 
   final String navigateTo;
   final String content;
@@ -10,6 +10,7 @@ class ActionButton extends StatelessWidget {
   final Color txtColor;
   final int height = 55;
   final double width = 0.9;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class ActionButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width * width,
         child: ElevatedButton(
           onPressed: () {
+            onPressed();
             Navigator.pushNamed(context, navigateTo);
           },
           style: ButtonStyle(
