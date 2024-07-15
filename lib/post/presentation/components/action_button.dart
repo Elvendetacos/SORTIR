@@ -20,7 +20,6 @@ class ActionButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             onPressed();
-            Navigator.pushNamed(context, navigateTo);
           },
           style: ButtonStyle(
             shape: WidgetStateProperty.all<RoundedRectangleBorder>(

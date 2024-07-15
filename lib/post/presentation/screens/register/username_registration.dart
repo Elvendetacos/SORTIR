@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:sortir/post/presentation/components/action_button.dart';
 import 'package:sortir/post/presentation/components/text_form_inut.dart';
 import 'package:sortir/post/presentation/layout/layout_forms.dart';
+import 'package:provider/provider.dart';
+import 'package:sortir/post/presentation/screens/register/registration_provider.dart';
 
-class UsernameRegistration extends StatelessWidget{
-  const UsernameRegistration({super.key});
+class UsernameRegistration extends StatefulWidget {
+  const UsernameRegistration({Key? key}) : super(key: key);
 
-  final String firstName = '';
-  final String lastName = '';
+  @override
+  _UsernameRegistrationState createState() => _UsernameRegistrationState();
+}
+
+class _UsernameRegistrationState extends State<UsernameRegistration> {
+  String firstName = '';
+  String lastName = '';
+  bool showText = false;
+
+  bool validateName(String name) {
+    RegExp nameRegex = RegExp(r'^[a-zA-Z]+$');
+    return nameRegex.hasMatch(name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +35,10 @@ class UsernameRegistration extends StatelessWidget{
               hintText: 'My first name is...',
               type: 'text',
               width: 0.9,
-              onChanged: (firstName){
-                print(firstName);
+              onChanged: (value){
+                setState(() {
+                  firstName = value;
+                });
               }
             ),
           const SizedBox(height: 28),
@@ -31,8 +46,10 @@ class UsernameRegistration extends StatelessWidget{
               hintText: 'My last name is...',
               type: 'text',
               width: 0.9,
-              onChanged: (lastName){
-                print(lastName);
+              onChanged: (value){
+                setState(() {
+                  lastName = value;
+                });
               }
           ),
           const SizedBox(height: 28),
@@ -46,10 +63,20 @@ class UsernameRegistration extends StatelessWidget{
             content: 'CONTINUE',
             color: Color(0xff9747FF),
             txtColor: Colors.white,
-            onPressed: () {  },),
+            onPressed: () {
+              if (validateName(firstName) && validateName(lastName)) {
+                Provider.of<RegistrationProvider>(context, listen: false).updateName(firstName, lastName);
+              } else {
+                // Show an error message
+                setState(() {
+                  showText = true; // Cambia el valor de showText a true cuando el nombre o apellido no son válidos
+                });
+              }
+            },
+          ),
+          showText ? Text('El nombre y apellido solo deben contener letras') : SizedBox.shrink(),
         ],
       ),
     );
   }
-
 }

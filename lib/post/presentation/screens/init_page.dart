@@ -25,9 +25,23 @@ class InitPage extends StatelessWidget{
               const Spacer(),
               Column(
                 children:[
-                  const ActionButton(navigateTo: "login", content: "SIGN IN WITH EMAIL", color: Color(0xff9747FF), txtColor: Colors.white),
+                  ActionButton(
+                    navigateTo: "login",
+                    content: "SIGN IN WITH EMAIL",
+                    color: Color(0xff9747FF),
+                    txtColor: Colors.white,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "login");
+                    },),
                   const SizedBox(height: 12),
-                  const ActionButton(navigateTo: "login", content: "SIGN IN WITH GOOGLE", color: Colors.white, txtColor: Colors.black),
+                  ActionButton(
+                    navigateTo: "login",
+                    content: "SIGN IN WITH GOOGLE",
+                    color: Colors.white,
+                    txtColor: Colors.black,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "login");
+                    },),
                   const SizedBox(height:24),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

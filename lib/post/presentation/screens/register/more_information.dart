@@ -1,13 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sortir/post/presentation/components/action_button.dart';
 import 'package:sortir/post/presentation/components/text_form_inut.dart';
 import 'package:sortir/post/presentation/layout/layout_forms.dart';
 
-class MoreInformation extends StatelessWidget {
+class MoreInformation extends StatefulWidget {
   const MoreInformation({Key? key}) : super(key: key);
-  final String age = '';
+
+  @override
+  _MoreInformationState createState() => _MoreInformationState();
+}
+
+class _MoreInformationState extends State<MoreInformation> {
   final String city = '';
+  int? selectedAge; // Variable para almacenar la edad seleccionada
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +22,20 @@ class MoreInformation extends StatelessWidget {
         children: Column(
           children:[
             const SizedBox(height: 28),
-            TextFormInput(
-                hintText: "Age",
-                type: 'other',
-                width: 0.9,
-                keyboardType: TextInputType.number,
-                onChanged: (age){
-                  print(age);
-                }
+            DropdownButton<int>(
+              hint: Text('Select Age'),
+              value: selectedAge,
+              items: List<int>.generate(48, (i) => i + 18).map((int value) {
+                return DropdownMenuItem<int>(
+                  value: value,
+                  child: Text(value.toString()),
+                );
+              }).toList(),
+              onChanged: (int? newValue) {
+                setState(() {
+                  selectedAge = newValue;
+                });
+              },
             ),
             const SizedBox(height: 28),
             TextFormInput(
@@ -43,6 +54,7 @@ class MoreInformation extends StatelessWidget {
                 txtColor: Colors.white,
                 onPressed: (){
                   print("more information");
+                  print("Selected age: $selectedAge");
                 },
               ),
           ]

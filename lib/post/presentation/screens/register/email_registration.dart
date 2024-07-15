@@ -3,9 +3,21 @@ import 'package:sortir/post/presentation/components/action_button.dart';
 import 'package:sortir/post/presentation/components/text_form_inut.dart';
 import 'package:sortir/post/presentation/layout/layout_forms.dart';
 
-class EmailRegistration extends StatelessWidget{
+class EmailRegistration extends StatefulWidget {
   const EmailRegistration({super.key});
-  final String emailValue = '';
+
+  @override
+  _EmailRegistrationState createState() => _EmailRegistrationState();
+}
+
+class _EmailRegistrationState extends State<EmailRegistration> {
+  String emailValue = '';
+  bool showText = false;
+
+  bool validateEmail() {
+    RegExp emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+    return emailRegex.hasMatch(emailValue);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +34,10 @@ class EmailRegistration extends StatelessWidget{
             type: 'email',
             width: 0.9,
             keyboardType: TextInputType.emailAddress,
-            onChanged: (emailValue){
-              print(emailValue);
+            onChanged: (value){
+              setState(() {
+                emailValue = value;
+              });
             }
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
@@ -33,12 +47,19 @@ class EmailRegistration extends StatelessWidget{
             color: Color(0xff9747FF),
             txtColor: Colors.white,
             onPressed: (){
-              print("email");
+              if (validateEmail()) {
+                // Navigate to the next screen
+              } else {
+                // Show an error message
+                setState(() {
+                  showText = true;
+                });
+              }
             },
           ),
+          showText ? Text('El correo electrónico no es válido') : SizedBox.shrink(),
         ],
       )
     );
   }
-
 }

@@ -4,6 +4,8 @@ import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:sortir/post/presentation/components/action_button.dart';
 import 'package:sortir/post/presentation/layout/layout_forms.dart';
+import 'package:provider/provider.dart';
+import 'package:sortir/post/presentation/screens/register/registration_provider.dart';
 
 class PhoneNumber extends StatefulWidget {
   const PhoneNumber({Key? key}) : super(key: key);
@@ -14,6 +16,19 @@ class PhoneNumber extends StatefulWidget {
 
 class _PhoneNumberState extends State<PhoneNumber> {
   Country _selectedCountry = CountryPickerUtils.getCountryByIsoCode('AR');
+  final TextEditingController _phoneController = TextEditingController();
+  bool showText = false;
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  bool validatePhoneNumber() {
+    RegExp phoneRegex = RegExp(r'^[0-9]+$');
+    return phoneRegex.hasMatch(_phoneController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +51,15 @@ class _PhoneNumberState extends State<PhoneNumber> {
                 onValuePicked: (Country country) {
                   setState(() {
                     _selectedCountry = country;
+                    print(_selectedCountry.phoneCode);
                   });
                 },
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _phoneController,
+                  decoration: const InputDecoration(
                     hintText: 'Phone Number',
                     hintStyle:  TextStyle(color: Colors.grey),
                     enabledBorder:  UnderlineInputBorder(
@@ -70,8 +87,21 @@ class _PhoneNumberState extends State<PhoneNumber> {
             content: 'CONTINUE',
             color: Color(0xff9747FF),
             txtColor: Colors.white,
-            onPressed: () {  }
-            ,)
+            onPressed: () {
+              if (validatePhoneNumber()) {
+                String phoneNumber = _phoneController.text;
+                print(phoneNumber);
+                Provider.of<RegistrationProvider>(context, listen: false).updatePhoneNumber(phoneNumber);
+                Navigator.pushNamed(context, 'info');
+              } else {
+                // Show an error message
+                setState(() {
+                  showText = true;
+                });
+              }
+            },
+          ),
+          showText ? Text('El número de teléfono no es válido') : SizedBox.shrink(),
         ]
       ),
     );

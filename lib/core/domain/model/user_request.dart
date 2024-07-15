@@ -1,19 +1,19 @@
 class UserRequest{
-  final String name;
-  final String email;
-  final String password;
-  final int age;
-  final String phone;
-  final String gender;
-  final String city;
+  String? name;
+  String? email;
+  String? password;
+  int? age;
+  String? phone;
+  String? gender;
+  String? city;
 
   UserRequest({
-    required this.name,
-    required this.email,
-    required this.password,
-    required this.age,
-    required this.phone,
-    required this.gender,
-    required this.city,
+    this.name,
+    this.email,
+    this.password,
+    this.age,
+    this.phone,
+    this.gender,
+    this.city,
   });
 }
