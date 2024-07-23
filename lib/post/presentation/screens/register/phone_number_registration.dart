@@ -18,6 +18,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
   Country _selectedCountry = CountryPickerUtils.getCountryByIsoCode('AR');
   final TextEditingController _phoneController = TextEditingController();
   bool showText = false;
+  RegExp phoneRegex = RegExp(r'^[0-9]+$');
 
   @override
   void dispose() {
@@ -26,7 +27,6 @@ class _PhoneNumberState extends State<PhoneNumber> {
   }
 
   bool validatePhoneNumber() {
-    RegExp phoneRegex = RegExp(r'^[0-9]+$');
     return phoneRegex.hasMatch(_phoneController.text);
   }
 
@@ -59,18 +59,26 @@ class _PhoneNumberState extends State<PhoneNumber> {
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: TextField(
                   controller: _phoneController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'Phone Number',
-                    hintStyle:  TextStyle(color: Colors.grey),
-                    enabledBorder:  UnderlineInputBorder(
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Color(0xff828693)),
                     ),
-                    focusedBorder:  UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
+                    focusedBorder:_phoneController.text.length < 10
+                        ? const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red))
+                        : const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff9747FF))),
+                    suffixIcon: _phoneController.text.length < 10
+                        ? Icon(Icons.error, color: Colors.red)
+                        : null,
                   ),
                   style: TextStyle(color: Colors.white, fontSize: 19),
                   keyboardType: TextInputType.phone,
+                  onChanged: (value) {
+                    setState(() {}); // Esto actualizará el estado y reconstruirá el widget
+                  },
                 ),
               ),
               const Spacer(),
@@ -92,7 +100,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                 String phoneNumber = _phoneController.text;
                 print(phoneNumber);
                 Provider.of<RegistrationProvider>(context, listen: false).updatePhoneNumber(phoneNumber);
-                Navigator.pushNamed(context, 'info');
+                Navigator.pushNamed(context, 'verification');
               } else {
                 // Show an error message
                 setState(() {
@@ -101,7 +109,6 @@ class _PhoneNumberState extends State<PhoneNumber> {
               }
             },
           ),
-          showText ? Text('El número de teléfono no es válido') : SizedBox.shrink(),
         ]
       ),
     );

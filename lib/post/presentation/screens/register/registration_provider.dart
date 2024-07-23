@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:sortir/core/domain/model/register/register_response.dart';
 import 'package:sortir/core/domain/use%20cases/use_case.dart';
 import 'package:sortir/core/domain/model/user_request.dart';
 
@@ -42,8 +43,22 @@ class RegistrationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<void> register() async {
-    // Usa registrationData para hacer la petición de registro
+  void updateFile(String file){
+    registrationData.file = file;
+    notifyListeners();
   }
+
+  void updateFrontPage(String frontPage){
+    registrationData.frontPage = frontPage;
+    notifyListeners();
+  }
+
+  UserRequest getRegistrationData() {
+    return registrationData;
+  }
+
+  Future<RegisterResponse> register() async {
+    return await useCase.register(registrationData);
+  }
+
 }

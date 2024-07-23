@@ -64,17 +64,10 @@ class _UsernameRegistrationState extends State<UsernameRegistration> {
             color: Color(0xff9747FF),
             txtColor: Colors.white,
             onPressed: () {
-              if (validateName(firstName) && validateName(lastName)) {
-                Provider.of<RegistrationProvider>(context, listen: false).updateName(firstName, lastName);
-              } else {
-                // Show an error message
-                setState(() {
-                  showText = true; // Cambia el valor de showText a true cuando el nombre o apellido no son válidos
-                });
-              }
+              Provider.of<RegistrationProvider>(context, listen: false).updateName(firstName, lastName);
+              Navigator.pushNamed(context, 'email');
             },
           ),
-          showText ? Text('El nombre y apellido solo deben contener letras') : SizedBox.shrink(),
         ],
       ),
     );

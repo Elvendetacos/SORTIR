@@ -97,7 +97,9 @@ class _VerificationState extends State<Verification> {
             content: 'CONTINUE',
             color: Color(0xff9747FF),
             txtColor: Colors.white,
-            onPressed: () {  },
+            onPressed: () {
+              Navigator.pushNamed(context, 'username');
+            },
           )
         ],
       ),

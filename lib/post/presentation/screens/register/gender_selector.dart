@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sortir/post/presentation/components/action_button.dart';
 import 'package:sortir/post/presentation/layout/layout_forms.dart';
+import 'package:provider/provider.dart';
+import 'package:sortir/post/presentation/screens/register/registration_provider.dart';
 
 class GenderSelector extends StatefulWidget {
   const GenderSelector({Key? key}) : super(key: key);
@@ -84,7 +86,18 @@ class _GenderSelectorState extends State<GenderSelector> {
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.46),
-          ActionButton(navigateTo: 'info', content: 'CONTINUE', color: Color(0xff9747FF), txtColor: Colors.white, onPressed: () { print('juan'); },),
+          ActionButton(
+            navigateTo: 'info',
+            content: 'CONTINUE',
+            color: Color(0xff9747FF),
+            txtColor: Colors.white,
+            onPressed: () {
+              if(isMenSelected || isWomenSelected){
+                isMenSelected ? Provider.of<RegistrationProvider>(context, listen: false).updateGender('M')
+                    : Provider.of<RegistrationProvider>(context, listen: false).updateGender('F');
+                Navigator.pushNamed(context, 'info');
+              }
+            },),
         ],
       ),
     );

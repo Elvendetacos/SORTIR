@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sortir/post/presentation/components/action_button.dart';
 import 'package:sortir/post/presentation/components/text_form_inut.dart';
 import 'package:sortir/post/presentation/layout/layout_forms.dart';
+import 'package:provider/provider.dart';
+import 'package:sortir/post/presentation/screens/register/registration_provider.dart';
 
 class EmailRegistration extends StatefulWidget {
   const EmailRegistration({super.key});
@@ -13,9 +15,9 @@ class EmailRegistration extends StatefulWidget {
 class _EmailRegistrationState extends State<EmailRegistration> {
   String emailValue = '';
   bool showText = false;
+  RegExp emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
 
   bool validateEmail() {
-    RegExp emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     return emailRegex.hasMatch(emailValue);
   }
 
@@ -40,6 +42,8 @@ class _EmailRegistrationState extends State<EmailRegistration> {
               });
             }
           ),
+          const SizedBox(height: 10),
+          !emailRegex.hasMatch(emailValue) ? Text('El correo electrónico no es válido', style: TextStyle(color: Colors.redAccent)) : SizedBox.shrink(),
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           ActionButton(
             navigateTo: 'password',
@@ -48,7 +52,8 @@ class _EmailRegistrationState extends State<EmailRegistration> {
             txtColor: Colors.white,
             onPressed: (){
               if (validateEmail()) {
-                // Navigate to the next screen
+                Provider.of<RegistrationProvider>(context, listen: false).updateEmail(emailValue);
+                Navigator.pushNamed(context, "password");
               } else {
                 // Show an error message
                 setState(() {
@@ -57,7 +62,7 @@ class _EmailRegistrationState extends State<EmailRegistration> {
               }
             },
           ),
-          showText ? Text('El correo electrónico no es válido') : SizedBox.shrink(),
+          const SizedBox(height: 20),
         ],
       )
     );

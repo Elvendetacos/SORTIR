@@ -6,6 +6,8 @@ class UserRequest{
   String? phone;
   String? gender;
   String? city;
+  String? file;
+  String? frontPage;
 
   UserRequest({
     this.name,
@@ -15,5 +17,7 @@ class UserRequest{
     this.phone,
     this.gender,
     this.city,
+    this.file,
+    this.frontPage,
   });
 }
