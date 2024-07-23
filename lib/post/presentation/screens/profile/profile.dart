@@ -33,8 +33,11 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin<Pr
 
     print('JWT Token: $jwtToken');
     print('Username: $id');
-    UserResponse user = await useCase.getUser(id!, jwtToken!);
-    print(user.city);
+    var user = await useCase.getUser(id!, jwtToken!);
+    print(user.toString());
+    print(user.name);
+    print(user.phone);
+    print(user.profileUrl);
     setState(() {
       name = user.name;
       phone = user.phone;

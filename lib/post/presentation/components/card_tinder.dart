@@ -70,7 +70,7 @@ class CardTinder extends StatelessWidget {
             bottom: 20,
             left: 20,
             child: IconButton(
-              icon: Icon(Icons.close, color: Colors.red),
+              icon: Icon(Icons.close, color: Colors.red, size: 27),
               onPressed: onDislike,
             ),
           ),
@@ -78,7 +78,7 @@ class CardTinder extends StatelessWidget {
             bottom: 20,
             right: 20,
             child: IconButton(
-              icon: Icon(Icons.favorite_border, color: Colors.red),
+              icon: Icon(Icons.favorite_border, color: Colors.red, size: 27),
               onPressed: onLike,
             ),
           ),

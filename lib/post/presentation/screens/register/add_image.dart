@@ -60,12 +60,7 @@ class ImagePickerScreen extends StatelessWidget {
                     Provider.of<RegistrationProvider>(context, listen: false).updateFile(profileImage);
                     Provider.of<RegistrationProvider>(context, listen: false).updateFrontPage(coverImage);
                     print(Provider.of<RegistrationProvider>(context, listen: false).registrationData);
-                    final response = await useCase.register(
-                      Provider.of<RegistrationProvider>(context, listen: false).registrationData,
-                    );
-                    if (response is RegisterResponse) {
-                      Navigator.pushNamed(context, 'login');
-                    }
+                    Navigator.pushNamed(context, 'preferences');
                   }
                 },
               ),

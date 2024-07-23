@@ -1,3 +1,5 @@
+import 'package:sortir/core/domain/model/category/category_item.dart';
+import 'package:sortir/core/domain/model/interest/interest_send.dart';
 import 'package:sortir/core/domain/model/login/login_request.dart';
 import 'package:sortir/core/domain/model/login/login_response.dart';
 import 'package:sortir/core/domain/model/register/register_response.dart';
@@ -28,7 +30,7 @@ class Service implements UseCase{
       print('Response data: ${response.data}');
       return LoginResponse.fromJson(response.data);
     } catch (e) {
-      return LoginResponse(jwtToken: '', id: 0);
+      return LoginResponse(jwtToken: '', username: '', id: 0);
     }
   }
 
@@ -56,7 +58,7 @@ class Service implements UseCase{
         "frontPage": userRequest.frontPage != null ? await MultipartFile.fromFile(userRequest.frontPage!) : null,
       });
       final response = await _dio.post(
-        'http://Sortir-load-balancer-391724916.us-east-1.elb.amazonaws.com/auth/signUp',
+        'http://sortir-249814840.us-east-1.elb.amazonaws.com/auth/signUp',
         data: formData,
         options: Options(
           headers: {
@@ -64,8 +66,9 @@ class Service implements UseCase{
           },
         ),
       );
-      print('Response data: ${response.data}');
-      return RegisterResponse.fromJson(response.data);
+      var userData = response.data['data'];
+      print('Response data: ${response.data['data']}');
+      return RegisterResponse.fromJson(userData);
     } catch(e){
       print("ta mal: $e");
       return RegisterResponse(id: 0, name: '', email: '');
@@ -88,6 +91,8 @@ class Service implements UseCase{
       print('Response data: $userData');
       return UserResponse.fromJson(userData);
     } catch (e) {
+      print(e);
+      print("ta mal chavo");
       return UserResponse(id: 0, name: '', phone: 0, age: 0, gender: '', city: '', profileUrl: '', frontPageUrl: '', interests: []);
     }
   }
@@ -103,6 +108,54 @@ class Service implements UseCase{
       return EventsResponse.fromJson(userData);
     } catch(e){
       return EventsResponse(id: 0, title: '', description: '', date: '', latitude: 0, longitude: 0, address: '', categories: [], complete: false);
+    }
+  }
+
+  @override
+  Future<List<CategoryItem>> getCategories() async {
+    try{
+      final response = await _dio.get(
+        'http://Sortir-load-balancer-391724916.us-east-1.elb.amazonaws.com/plan-service/category/all',
+      );
+      var userData = response.data['data'];
+      print('Response data: $userData');
+      print("hola");
+      return userData.map<CategoryItem>((item) => CategoryItem.fromJson(item)).toList();
+    } catch(e){
+      print(e);
+      return [];
+    }
+  }
+
+  @override
+  Future<List<InterestSend>> sendCategories(List<InterestSend> interests, int id) async {
+    try{
+      final response = await _dio.post(
+        'http://sortir-249814840.us-east-1.elb.amazonaws.com/interest/interests/$id',
+        data: {
+          'interests': interests.map((interest) => interest.toJson()).toList(),
+        },
+      );
+      print('Response data: ${response.data}');
+      return interests;
+    } catch(e){
+      print(e);
+      return [];
+    }
+  }
+
+  @override
+  Future<List<UserResponse>> getRecommendations(String city, int id) async {
+    try{
+      final response = await _dio.get(
+        'http://54.234.135.230:8080/recommendations?city=$city&user_id=$id',
+      );
+      var userData = response.data['data'];
+      print('Response data: $userData');
+      return userData.map<UserResponse>((item) => UserResponse.fromJson(item)).toList();
+    } catch(e){
+      print(e);
+      return [];
     }
   }
 }

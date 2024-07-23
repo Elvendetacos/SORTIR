@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sortir/post/presentation/components/notifications.dart';
 import 'package:sortir/post/presentation/screens/home/events.dart';
 import 'package:sortir/post/presentation/screens/home/match_view.dart';
 import 'package:sortir/post/presentation/screens/profile/profile.dart';
@@ -16,7 +17,8 @@ class _LayoutWithMenuBarState extends State<LayoutWithMenuBar> {
   final List<Widget> _widgetOptions = <Widget>[
     Events(),
     Profile(),
-    Text('Add Profile Page'),
+    Text("hi"),
+    Notifications(),
     MatchView(),
   ];
 

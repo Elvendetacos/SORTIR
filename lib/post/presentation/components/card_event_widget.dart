@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CardEventWidget extends StatelessWidget{
   final String title;
@@ -36,11 +37,13 @@ class CardEventWidget extends StatelessWidget{
                   height: 210,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.75),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/FONDOKF.jpg'),
-                      fit: BoxFit.cover,
-                    ),
+                    color: Colors.black,
                   ),
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                      child: SvgPicture.asset('assets/svg/icon.svg', fit:BoxFit.contain)
+                  )
                 ),
               ),
             ),

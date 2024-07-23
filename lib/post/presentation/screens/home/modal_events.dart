@@ -3,7 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ModalEvents extends StatefulWidget {
   final String title;
-  const ModalEvents({Key? key, required this.title}) : super(key: key);
+  final String date;
+  final String description;
+  final String hour;
+  const ModalEvents({super.key, required this.title, required this.date, required this.description, required this.hour});
 
   @override
   _ModalEventsState createState() => _ModalEventsState();
@@ -58,12 +61,12 @@ class _ModalEventsState extends State<ModalEvents> {
                   Row(
                       children:[
                         const SizedBox(width: 10),
-                        const Column(
+                        Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(Icons.calendar_today, color: Color(0xffE4F757), size: 32,),
-                              SizedBox(height: 8),
-                              Text("12/12/2021", style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+                              const Icon(Icons.calendar_today, color: Color(0xffE4F757), size: 32,),
+                              const SizedBox(height: 8),
+                              Text(widget.date.substring(0, 10), style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
                             ]
                         ),
                         const SizedBox(width: 30),
@@ -79,21 +82,21 @@ class _ModalEventsState extends State<ModalEvents> {
                             ]
                         ),
                         const SizedBox(width: 30),
-                        const Column(
+                        Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(Icons.watch_later_outlined, color: Color(0xffE4F757), size: 32,),
                               SizedBox(height: 8),
-                              Text("7:00 - 21:00 ", style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+                              Text(widget.hour, style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
                             ]
                         ),
                         const SizedBox(width: 10),
                       ]
                   ),
-                  const Column(
+                  Column(
                     children: [
-                      SizedBox(height: 10),
-                      Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, ultricies nunc. Nullam nec purus feugiat, molestie ipsum et, ultricies nunc. Nullam nec purus feugiat, molestie ipsum et, ultricies nunc.", style: TextStyle(color: Colors.white, fontSize: 14)),
+                      const SizedBox(height: 10),
+                      Text(widget.description, style: TextStyle(color: Colors.white, fontSize: 14)),
                     ],
                   ),
                 ]

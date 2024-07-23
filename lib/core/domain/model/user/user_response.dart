@@ -1,3 +1,5 @@
+import 'package:sortir/core/domain/model/category/category_item.dart';
+import 'package:sortir/core/domain/model/interest/interest_send.dart';
 import 'package:sortir/core/domain/model/interest_request.dart';
 
 class UserResponse{

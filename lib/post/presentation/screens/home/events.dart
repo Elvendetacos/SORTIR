@@ -25,12 +25,10 @@ class _EventsState extends State<Events> {
   }
 
   void fetchEvents() async {
-    var event1 = await useCase.getEvent(7);
-    var event2 = await useCase.getEvent(8);
-    var event3 = await useCase.getEvent(9);
+    var event1 = await useCase.getEvent(104);
 
     setState(() {
-      events = [event1, event2, event3];
+      events = [event1];
     });
   }
 
@@ -111,7 +109,7 @@ class _EventsState extends State<Events> {
                             backgroundColor: Colors.transparent,
                             elevation: 0,
                             context: context,
-                            builder: (context) => ModalEvents(title: event.title,),
+                            builder: (context) => ModalEvents(title: event.title, date: event.date, description: event.description, hour: '10:00'),
                           );
                         },
                       ),

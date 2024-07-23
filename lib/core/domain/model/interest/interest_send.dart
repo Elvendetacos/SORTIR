@@ -1,17 +1,14 @@
-class InterestRequest{
-  final int id;
+class InterestSend{
   final String description;
   final List<String> activities;
 
-  InterestRequest({
-    required this.id,
+  InterestSend({
     required this.description,
     required this.activities,
   });
 
-  factory InterestRequest.fromJson(Map<String, dynamic> json) {
-    return InterestRequest(
-      id: json['id'],
+  factory InterestSend.fromJson(Map<String, dynamic> json) {
+    return InterestSend(
       description: json['description'],
       activities: List<String>.from(json['activities']),
     );
@@ -19,7 +16,6 @@ class InterestRequest{
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'description': description,
       'activities': activities,
     };
