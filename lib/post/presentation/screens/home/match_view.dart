@@ -23,8 +23,20 @@ class _MatchViewState extends State<MatchView> {
   @override
   void initState() {
     super.initState();
-    loadUserCredentials();
-    fetchEvents();
+    _cards = List<Widget>.generate(
+      20,
+          (index) => CardTinder(
+          title: 'Marco Antonio',
+          description: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas scelerisque est lacus, sit amet venenatis massa sodales ac. Ut iaculis sagittis sapien, a scelerisque justo pretium non. Praesent faucibus augue vel magna vestibulum, condimentum ultrice.',
+          image: 'https://picsum.photos/200/300',
+          onLike: () {
+            _controller.swipe(CardSwiperDirection.right);
+          },
+          onDislike: () {
+            _controller.swipe(CardSwiperDirection.left);
+          }
+      ),
+    );
   }
 
   void loadUserCredentials() async {
